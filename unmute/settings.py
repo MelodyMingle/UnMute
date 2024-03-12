@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # myapps
 
     'spottiapp',
+    'users',
 ]
 
 MIDDLEWARE = [

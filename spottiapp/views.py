@@ -8,7 +8,8 @@ from django.urls import reverse_lazy
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    
+    # ordering = ['-id'] # this will order the posts by id in descending order 
+    ordering = ['post_date'] 
 
 class ArticleDetailView(DetailView):
     model = Post
