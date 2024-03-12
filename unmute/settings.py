@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     # Tailwind CSS
     'compressor',
+    'django_admin_tailwind',
 
+    
 
     # myapps
 
