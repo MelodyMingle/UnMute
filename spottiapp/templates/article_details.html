@@ -1,5 +1,5 @@
 <h1>{{post.title}}</h1>
-<small>By: {{ post.author }}</small>
+<small>By: {{ post.author }} - <a href="{% url 'delete_post' post.pk %}">(Delete)</a> - <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
 
 <hr>
 <br/>
