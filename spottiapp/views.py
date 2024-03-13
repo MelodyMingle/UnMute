@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import PostForm, EditForm
 from .models import Post
@@ -9,13 +10,20 @@ class HomeView(ListView):
     model = Post
     template_name = 'home.html'
     # ordering = ['-id'] # this will order the posts by id in descending order 
-    ordering = ['post_date'] 
+    ordering = ['-post_date'] 
 
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+        get_likes = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = get_likes.total_likes()
+        context['total_likes'] = total_likes
 
+
+        return context
 
 class AddPostView(CreateView):
     model = Post
@@ -35,6 +43,14 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse_lazy('article-detail', args=[str(pk)]))
+
+
 
 
     # fields = ['title', 'title_tag', 'comment']
