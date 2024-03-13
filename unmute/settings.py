@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     # Tailwind CSS
     'compressor',
     'django_admin_tailwind',
-
     
+    # 3rd Party
+    'rest_framework',
 
     # myapps
-
+    'spotify',
     'spottiapp',
     'users',
 ]
@@ -144,5 +145,15 @@ STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+      "rest_framework.authentication.SessionAuthentication",
+      "rest_framework.authentication.BasicAuthentication",
+      
+    ],
+}
