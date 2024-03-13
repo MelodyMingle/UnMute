@@ -10,6 +10,11 @@ class Post(models.Model):
     comment = models.TextField()
     title_tag = models.CharField(max_length=100, default='Spottiapp')
     post_date = models.TimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='blog_posts')
+
+
+    def total_likes(self):
+        return self.likes.count()
 
 
 

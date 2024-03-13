@@ -2,20 +2,31 @@ Current user: {{ user}}
 
 <h1>{{post.title}}</h1>
 <small>By:
-    {{ post.author }} - 
-    {{ post.post_date }} 
-    {% if post.author.id == user.id %}
+    {{ post.author }} -
+    {{ post.post_date }}
+    {% if user.is_authenticated %}
+    {% if post.author == user %}
 
-    - 
-    <a href="{% url 'delete_post' post.pk %}">(Delete)</a> - 
+    -
+    <a href="{% url 'delete_post' post.pk %}">(Delete)</a> -
     <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
-    {% endif %}
+{% endif %}
+
+{% endif %}
 <hr>
-<br/>
+<br />
 
 {{ post.comment|safe }}
 
 
-<br/><br>
+<br /><br>
 
 <a href="{% url 'home' %}">Back home</a>
+
+
+
+<form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
+
+</form>
