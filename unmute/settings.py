@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # myapps
-    'spotify',
     'spottiapp',
+    'spotify',
     'users',
 ]
 
@@ -142,9 +142,8 @@ COMPRESS_ENABLED = True
  
 STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
-
-
-
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 
 REST_FRAMEWORK = {
