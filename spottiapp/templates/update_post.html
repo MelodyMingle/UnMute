@@ -6,15 +6,19 @@
 
 <table>
     <div class="form-group ">
-
+        
         <h2 class="text-2xl font-bold mb-4">Update post</h2>
         <form method="POST" class="space-y-4 ">
             {{ form.as_table }}
             {% csrf_token %}
         </table>
+        {% if post.author == user %}
         <button class="px-4 py-2 bg-blue-500 text-white rounded" type="submit">Update</button>
     </form>
 </div>
+{% else %}
+Not your post
+{% endif %}
 
 
 {% endblock %}

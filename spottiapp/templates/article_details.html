@@ -1,14 +1,19 @@
+Current user: {{ user}}
+
 <h1>{{post.title}}</h1>
 <small>By:
     {{ post.author }} - 
-    {{ post.post_date }} - 
+    {{ post.post_date }} 
+    {% if post.author.id == user.id %}
+
+    - 
     <a href="{% url 'delete_post' post.pk %}">(Delete)</a> - 
     <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
-
+    {% endif %}
 <hr>
 <br/>
 
-{{ post.comment}}
+{{ post.comment|safe }}
 
 
 <br/><br>
