@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "unmute/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "unmute/wsgi.py"
+      }
+    ]
+  }
