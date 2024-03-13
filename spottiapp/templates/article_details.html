@@ -1,32 +1,36 @@
+{% load compress %}
+{% load static %}
+
 Current user: {{ user}}
+<div>
+    <h1>{{post.title}}</h1>
+    <small>By:
+        {{ post.author }} -
+        {{ post.post_date }}
+        {% if user.is_authenticated %}
+        {% if post.author == user %}
 
-<h1>{{post.title}}</h1>
-<small>By:
-    {{ post.author }} -
-    {{ post.post_date }}
-    {% if user.is_authenticated %}
-    {% if post.author == user %}
+        -
+        <a href="{% url 'delete_post' post.pk %}">(Delete)</a> -
+        <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
+    {% endif %}
 
-    -
-    <a href="{% url 'delete_post' post.pk %}">(Delete)</a> -
-    <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
-{% endif %}
+    {% endif %}
+    <hr>
+    <br />
 
-{% endif %}
-<hr>
-<br />
-
-{{ post.comment|safe }}
-
-
-<br /><br>
-
-<a href="{% url 'home' %}">Back home</a>
+    {{ post.comment|safe }}
 
 
+    <br /><br>
 
-<form action="{% url 'like_post' post.pk %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
+    <a href="{% url 'home' %}">Back home</a>
 
-</form>
+
+
+    <form action="{% url 'like_post' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
+
+    </form>
+</div>

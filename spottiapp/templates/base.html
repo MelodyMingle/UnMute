@@ -82,15 +82,31 @@
       </div>
     </div>
   </nav>
-
-
+<main class="flex flex-row justify-between">
+  
+ 
   {% block content %}
 
   {% endblock content %}
+  <aside class="flex flex-col w-1/5 justify-end bg-slate-500">
+    <h1>friends go here</h1>
+    {{ user }}
+  </aside>
+</main>
+<!-- component -->
+<main class="grid place-items-center min-h-screen bg-gradient-to-t from-blue-200 to-indigo-900 p-5">
+  <div>
+    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-gray-200 mb-5">Made for you</h1>
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
 
+    </section>
   </div>
+</main>
 
+<footer class="fixed align-center bottom-0 w-full h-24 border-t">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">UnMute</h2>
+</footer>  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.js"></script>
 </body>
 
