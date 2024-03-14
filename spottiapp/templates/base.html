@@ -27,12 +27,12 @@
           {% if user.is_authenticated %}
           <li>
             <button onclick="authenticateSpotify()"
-              class="block py-2 pl-3 pr-4 rounded md:text-green-600 md:p-0"
+              class="block py-2 pl-3 pr-4 rounded md:text-green-200 md:p-0"
               aria-current="page">Spotify Login</button>
           </li>
           <li>
             <a href="{% url 'logout' %}"
-              class="block py-2 pl-3 pr-4 text-xl rounded text-quinary md:bg-transparent md:text-quinary md:p-0 dark:text-white"
+              class="z-10 block py-2 pl-3 pr-4 text-xl rounded translate-z-3 text-quinary md:bg-transparent md:text-quinary md:p-0 dark:text-white"
               aria-current="page">Log Out</a>
           </li>
           
