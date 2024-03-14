@@ -71,26 +71,36 @@
               aria-current="page">Log In</a>
           </li>
 
-
           {% endif %}
 
           </li>
-
-
 
         </ul>
       </div>
     </div>
   </nav>
+<main class="flex flex-col min-h-screen  bg-gradient-to-t from-blue-200 to-indigo-900">
+  <div class="flex flex-raw min-w-screen">
+    {% block content %}
 
-
-  {% block content %}
-
-  {% endblock content %}
-
-
+    {% endblock content %}
+    <aside class="flex flex-col w-1/5 justify-end bg-slate-500">
+      <h1>friends go here</h1>
+      {{ user }}
+    </aside>
   </div>
 
+  
+    <div>
+    
+      <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      </section>
+    </div>
+  </main>
+
+  <footer class="fixed align-center bottom-0 w-full h-24 border-t">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">UnMute</h2>
+  </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.js"></script>
 </body>
 

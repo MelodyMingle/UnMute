@@ -1,61 +1,64 @@
-
 {% extends "base.html" %}
 
 {% block content %}
+<div class="flex flex-col mt-6 w-full">
+    <div class="bg-gray-600" >
+        <button onclick="authenticateSpotify()">Authenticate Spotify</button>
+        <button onclick="searchTrack()">Search Spotify</button>
+        <button onclick="searchPlaylist()">Search Spotify Playlist</button>
+    </div>
+<div class='mt-6'>
+    <h1 class="bg-green-400">Post</h1>
 
-<button onclick="authenticateSpotify()">Authenticate Spotify</button>
-<button onclick="searchTrack()">Search Spotify</button>
-<button onclick="searchPlaylist()">Search Spotify Playlist</button>
 
-<h1 class="bg-green-400">Post</h1>
-
-
-<ul >
+<ul>
     {% for post in object_list %}
     <div class="gap-2 bg-slate-600">
 
-        <li> <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a> - {{ post.author}} - {{ post.post_date }}  
+        <li> <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a> - {{ post.author}} - {{ post.post_date }}
             {% if post.author == user %}
-            - <a href="{% url 'update_post' post.pk %}">(Edit)</a> -  <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+            - <a href="{% url 'update_post' post.pk %}">(Edit)</a> - <a
+                href="{% url 'delete_post' post.pk %}">(Delete)</a>
             {% endif %}
-        </div>
-            {{ post.comment|slice:":200"|safe}}
-        </li>
+    </div>
+    {{ post.comment|slice:":200"|safe}}
+    </li>
     {% endfor %}
 </ul>
-
+</div>
+</div>
 <script>
     function authenticateSpotify() {
         fetch("/spotify/is-authenticated")
-          .then((response) => {
-            console.log(response)
-            return response.json()})
-         .then((response)=>{
-            console.log(response)
-            if(response.status == false){
-                window.location.replace('spotify/get-auth-url')
-            }
-         })
+            .then((response) => {
+                console.log(response)
+                return response.json()
+            })
+            .then((response) => {
+                console.log(response)
+                if (response.status == false) {
+                    window.location.replace('spotify/get-auth-url')
+                }
+            })
     }
 
-    function searchTrack(){
+    function searchTrack() {
         fetch("/spotify/search?query=trouble")
-        .then((response)=>{
-            console.log(response)
-            return response.json();
-        })
-        .then(data => console.log(data))
+            .then((response) => {
+                console.log(response)
+                return response.json();
+            })
+            .then(data => console.log(data))
     }
 
-    function searchPlaylist(){
+    function searchPlaylist() {
         fetch("/spotify/playlists")
-        .then((response)=>{
-            console.log(response)
-            return response.json();
-        })
-        .then(data => console.log(data))
+            .then((response) => {
+                console.log(response)
+                return response.json();
+            })
+            .then(data => console.log(data))
     }
-    </script>
+</script>
 
 {% endblock content %}
-
