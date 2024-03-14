@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'unmute.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "zxwaiwqo",
-        "USER": "zxwaiwqo",
-        "PASSWORD": "VFOuFRaLSV1172mo-qVKncMGiQ-rdnJo",
-        "HOST": "bubble.db.elephantsql.com",
+        "NAME": "xdynhrhm",
+        "USER": "xdynhrhm",
+        "PASSWORD": "Lrj97H1CONJ6zRbnipXn4wh02uonO2ko",
+        "HOST": "bubble.db.elephantsql.com",  # set in docker-compose.yml
         "PORT": 5432,  # default postgres port
     }
 }
