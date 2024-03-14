@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# UnMute
 
-## Getting Started
+### Team Members
 
-First, run the development server:
+- Andrea Thiel, Bradley Hower, Christopher Acosta, Dominique McClaney, and Felix Taveras
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In response to the fragmented nature of music discovery and social connection online, UnMute introduces a pioneering solution aimed at integrating these experiences. Leveraging the Spotify API, this revolutionary music social media app offers a comprehensive platform that seamlessly combines music exploration with social interaction, providing users with a more engaging and personalized experience. Here are the key features:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Personalized Music Discovery**: Utilizing the Spotify API, UnMute delivers tailored music recommendations and curated playlists that adapt to users' musical preferences and those of their social connections.
+- **Dynamic Social Interaction**: The app facilitates direct music sharing, enabling users to comment on each other's playlists, initiate discussions, and exchange musical insights. This feature enhances engagement by fostering interactions centered around music discovery.
+- **Collaborative Playlists**: UnMute transforms playlist creation into a collaborative endeavor, allowing friends to collectively curate playlists for various occasions. Whether it's a road trip or a study session, users can create shared playlists, turning music exploration into a communal adventure.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+UnMute's unique value proposition lies in its emphasis on the social dimension of music. By seamlessly integrating with Spotify, the platform provides a unified space where users can explore new music, share their musical tastes, and connect with like-minded individuals. Particularly beneficial for enthusiasts of niche genres, UnMute offers a dedicated community where users can unearth hidden gems and engage with others who share their specific musical interests.
 
-## Learn More
+### Setup
 
-To learn more about Next.js, take a look at the following resources:
+- Clone the repository to your local machine
+- Install a Python virtual environment
+- Run `pip install -r requirements.txt`
+- Run makemigrations `python3 manage.py makemigrations`
+- Run migrate `python3 manage.py makemigrations`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### How to initialize/run your application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Run `python3 manage.py runserver`
 
-## Deploy on Vercel
+### Wire Frame
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Wire Frame](./Wire%20Frame.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Domain
+
+![Domain Model](./Domain%20Model.png)
+
+### Project Management Board
+
+[https://github.com/orgs/MelodyMingle/projects/1](https://github.com/orgs/MelodyMingle/projects/1)
