@@ -28,11 +28,11 @@ UnMute's unique value proposition lies in its emphasis on the social dimension o
 
 ### Wire Frame
 
-[Wire Frame](./Wire%20Frame.png)
+![Wire Frame](./Wire%20Frame.png)
 
 ### Domain
 
-[Domain Model](./Domain%20Model.png)
+![Domain Model](./Domain%20Model.png)
 
 ### Project Management Board
 
