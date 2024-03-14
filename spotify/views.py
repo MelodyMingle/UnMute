@@ -106,19 +106,37 @@ class SpotifySearchPlaylist(GenericViewSet):
         access_token = token.access_token
         headers = {"Authorization": f"Bearer {access_token}"}
         query = {}
-        limit = 20
-        offset = 0
         params = {'q': query,}
         url = "https://api.spotify.com/v1/me/playlists"
         response = requests.get(url, headers=headers, params=params)
         
         return Response(response.json(), status=status.HTTP_200_OK)
         
+class SpotifyFeaturedPlaylists(GenericViewSet):
+    permission_classes = (AllowAny,)
+    
+    def list(self, request):
+        
+        session_id = self.request.session.session_key
+        
+        if not is_spotify_authenticated(session_id) and not refresh_spotify_token(session_id):
+                return Response({'error': 'Failed to authenticate with Spotify'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        token = get_user_tokens(session_id)
+        if token is None:
+            return Response({'error': 'No Spotify token found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        access_token = token.access_token
+        headers = {"Authorization": f"Bearer {access_token}"}
+        query = {}
+        locale = "en_US"
+        limit = 20
+        offset = 0
+        params = {'q': query, 'limit': limit, 'offset': offset, 'locale': locale} 
+        url = "https://api.spotify.com/v1/browse/featured-playlists"
+        response = requests.get(url, headers=headers, params=params)
 
-
-
-
-
+        return Response(response.json(), status=status.HTTP_200_OK)
 
 
 
