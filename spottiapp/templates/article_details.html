@@ -1,32 +1,71 @@
-Current user: {{ user}}
-
-<h1>{{post.title}}</h1>
-<small>By:
-    {{ post.author }} -
-    {{ post.post_date }}
-    {% if user.is_authenticated %}
-    {% if post.author == user %}
-
-    -
-    <a href="{% url 'delete_post' post.pk %}">(Delete)</a> -
-    <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
-{% endif %}
-
-{% endif %}
-<hr>
-<br />
-
-{{ post.comment|safe }}
+{% extends 'base.html' %}
 
 
-<br /><br>
+{% block content %}
+<div class="flex flex-col align-center mx-auto">
 
-<a class="bg-slate-600" href="{% url 'home' %}">Back home</a>
+    <h1>{{post.title}}</h1>
+    <small><strong>By:
+            {{ post.author }} -
+            {{ post.post_date }}
+            {% if user.is_authenticated %}
+            {% if post.author == user %}
+
+            -
+            <a href="{% url 'delete_post' post.pk %}" style="background-color: #EB9A2F ;" class="px-4 py-2 rounded hover:bg-red-700 transition duration-150 ease-in-out ">Delete</a>
+            -
+            <a href="{% url 'update_post' post.pk %}" style="background-color: #EB9A2F ;"
+                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-150 ease-in-out">Edit</a>
+        </strong>
+    </small>
+
+    {% endif %}
+
+    {% endif %}
+    <hr>
+    <br>
+
+    {{ post.comment|safe }}
+
+
+    <br /><br>
 
 
 
-<form action="{% url 'like_post' post.pk %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
 
-</form>
+    <form action="{% url 'like_post' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{
+        total_likes }}
+
+    </form>
+
+
+    <br></br>
+
+    <h2>Comments</h2>
+    {% if not post.comments.all %}
+    <p>No comments yet <a href="{% url 'add_comment' post.pk %}">Add Comment</a></p>
+    {% else %}
+    <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+    <br><br>
+    {% for comment in post.comments.all %}
+    <strong>
+
+        {{ comment.name }} - {{ comment.time_added}}
+    </strong>
+    <br>
+    {{ comment.body }}
+
+    {% endfor %}
+    <br>
+    <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+    {% endif %}
+
+
+
+</div>
+
+
+
+{% endblock %}
