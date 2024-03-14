@@ -14,6 +14,7 @@ class PostForm(forms.ModelForm):
             # 'author': forms.Select(attrs={'class': 'form-control'}),
             # 'author': forms.Select(attrs={'class': 'form-control'}),
             'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Comment'}),
+            
         }
 
         

@@ -5,14 +5,31 @@
 
 <button onclick="authenticateSpotify()">Authenticate Spotify</button>
 <button onclick="searchTrack()">Search Spotify</button>
-<button onclick="searchPlaylist()">Search Spotify Playlist</button>
+<button onclick="searchPlaylist()">My Playlists</button>
+<button onclick="getFeaturedPlaylists()">Featured Playlists</button>
+
 
 <h1 class="bg-green-400">Post</h1>
 
+<!-- <h1>Parsed Playlists</h1>
+    <ul>
+        {% for playlist in parsed_playlists %}
+            <li>
+                <strong>Name:</strong> {{ playlist.name }}<br>
+                <strong>Description:</strong> {{ playlist.description }}<br>
+                <strong>Owner:</strong> {{ playlist.owner }}<br>
+                <strong>Total Tracks:</strong> {{ playlist.tracks_total }}<br>
+                <strong>Public:</strong> {{ playlist.public }}<br>
+                <strong>URL:</strong> <a href="{{ playlist.url }}">{{ playlist.url }}</a><br>
+            </li>
+        {% endfor %}
+ -->
+
+ <!-- <div id="playlistResults"></div> -->
 
 <ul >
+    <div class="gap-2 bg-slate-600" id="playlistResults">
     {% for post in object_list %}
-    <div class="gap-2 bg-slate-600">
 
         <li> <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a> - {{ post.author}} - {{ post.post_date }}  
             {% if post.author == user %}
@@ -50,11 +67,63 @@
     function searchPlaylist(){
         fetch("/spotify/playlists")
         .then((response)=>{
+            
+            data = response.json()
+            
+            return data;
+        })
+        .then((data) => {
+            const playlists = data.items;
+            const parsedPlaylists = [];
+            playlists.forEach(playlist => {
+                const parsedPlaylist = {
+                    "name": playlist.name,
+                    "description": playlist.description,
+                    "owner": playlist.owner.display_name,
+                    "tracks_total": playlist.tracks.total,
+                    "url": playlist.external_urls.spotify,
+                    "image": playlist.images.url
+                };
+                parsedPlaylists.push(parsedPlaylist);
+            });
+            console.log('PLAYLIST!!!!!', parsedPlaylists)
+            displayPlaylists(parsedPlaylists);
+        })
+    }
+
+    function getFeaturedPlaylists(){
+        fetch("/spotify/featured-playlists")
+        .then((response)=>{
             console.log(response)
             return response.json();
         })
         .then(data => console.log(data))
     }
+
+    function displayPlaylists(playlists) {
+        const playlistContainer = document.getElementById("playlistResults");
+        playlistContainer.innerHTML = ""; // Clear previous content
+    
+        playlists.forEach(playlist => {
+            const playlistElement = document.createElement("div");
+            playlistElement.innerHTML = `
+            <a href="${playlist.url}">
+            <image src="${playlist.image}" />
+            </a><br><br>
+            <strong>Name:</strong> ${playlist.name}<br>
+            <strong>Description:</strong> ${playlist.description}<br>
+            <strong>Owner:</strong> ${playlist.owner}<br>
+            <strong>Total Tracks:</strong> ${playlist.tracks_total}<br>
+        `;
+            playlistContainer.appendChild(playlistElement);
+        });
+    }
+
+    
+    window.onload = function() {
+        searchTrack();
+        searchPlaylist();
+    };
     </script>
 
 {% endblock content %}
