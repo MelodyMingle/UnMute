@@ -8,7 +8,7 @@
     <main class="grid min-h-screen place-items-center">
         <div>
             <h1 class="mb-5 text-4xl font-bold sm:text-5xl md:text-7xl text-tertiary">My playlists</h1>
-            <section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <section id= "playlistResults"  class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <!-- CARD 1 -->
                 <div class="p-3 rounded shadow-lg bg-secondary">
                     <div class="relative group">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="p-5">
                         <h3 class="text-lg text-white">I n t u r l u d e</h3>
-                        <p class="text-gray-400">Hip Hop</p>
+                        <p class="text-gray-400">Tracks: 5</p>
                     </div>
                 </div>
                 <!-- END OF CARD 1 -->
@@ -145,7 +145,7 @@
     <main class="grid min-h-screen place-items-center ">
         <div>
             <h1 class="mb-5 text-4xl font-bold sm:text-5xl md:text-7xl text-tertiary">Featured Playlist</h1>
-            <section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <section  id="featuredPlaylistResults" class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <!-- CARD 1 -->
                 <div class="p-3 rounded shadow-lg bg-secondary">
                     <div class="relative group">
@@ -162,8 +162,6 @@
                                         d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.920 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.060.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
                                 </svg>
                             </button>
-
-    
                             <button
                                 class="text-white transition transform translate-y-3 opacity-0 hover:scale-110 group-hover:translate-y-0 group-hover:opacity-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -410,20 +408,8 @@
         </div>
     </main>
 
-<div>     
-    <ul >
-        {% for post in object_list %}
-        <div class="bg-slate-600">
-            
-            <li> <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a> - {{ post.author}} - {{ post.post_date }}  
-                {% if post.author == user %}
-                - <a href="{% url 'update_post' post.pk %}">(Edit)</a> -  <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
-                {% endif %}
-            </div>
-            {{ post.comment|slice:":200"|safe}}
-        </li>
-    {% endfor %}
-</ul>
+     
+
 </div>
 
 <script>
@@ -440,157 +426,6 @@
          })
     }
 
-    function searchTrack(){
-        fetch("/spotify/search?query=trouble")
-        .then((response)=>{
-            console.log(response)
-            return response.json();
-        })
-        .then(data => console.log(data))
-    }
-    function searchCache(){
-        cachedjson = {
-            "href": "https://api.spotify.com/v1/me/shows?offset=0&limit=20",
-            "limit": 20,
-            "next": "https://api.spotify.com/v1/me/shows?offset=1&limit=1",
-            "offset": 0,
-            "previous": "https://api.spotify.com/v1/me/shows?offset=1&limit=1",
-            "total": 4,
-            "items": [
-            {
-                "collaborative": false,
-                "description": "string",
-                "external_urls": {
-                  "spotify": "string"
-                },
-                "href": "string",
-                "id": "string",
-                "images": [
-                  {
-                    "url": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
-                    "height": 300,
-                    "width": 300
-                  }
-                ],
-                "name": "Somethin else",
-                "owner": {
-                  "external_urls": {
-                    "spotify": "string"
-                  },
-                  "followers": {
-                    "href": "string",
-                    "total": 0
-                  },
-                  "href": "string",
-                  "id": "string",
-                  "type": "user",
-                  "uri": "string",
-                  "display_name": "string"
-                },
-                "public": false,
-                "snapshot_id": "string",
-                "tracks": {
-                  "href": "string",
-                  "total": 0
-                },
-                "type": "string",
-                "uri": "string"
-              },
-              {
-                "collaborative": false,
-                "description": "description",
-                "external_urls": {
-                  "spotify": "string"
-                },
-                "href": "string",
-                "id": "string",
-                "images": [
-                  {
-                    "url": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
-                    "height": 300,
-                    "width": 300
-                  }
-                ],
-                "name": "string",
-                "owner": {
-                  "external_urls": {
-                    "spotify": "string"
-                  },
-                  "followers": {
-                    "href": "string",
-                    "total": 0
-                  },
-                  "href": "string",
-                  "id": "string",
-                  "type": "user",
-                  "uri": "string",
-                  "display_name": "string"
-                },
-                "public": false,
-                "snapshot_id": "string",
-                "tracks": {
-                  "href": "string",
-                  "total": 0
-                },
-                "type": "string",
-                "uri": "string"
-              },
-              {
-                "collaborative": false,
-                "description": "string",
-                "external_urls": {
-                  "spotify": "string"
-                },
-                "href": "string",
-                "id": "string",
-                "images": [
-                  {
-                    "url": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
-                    "height": 300,
-                    "width": 300
-                  }
-                ],
-                "name": "string",
-                "owner": {
-                  "external_urls": {
-                    "spotify": "string"
-                  },
-                  "followers": {
-                    "href": "string",
-                    "total": 0
-                  },
-                  "href": "string",
-                  "id": "string",
-                  "type": "user",
-                  "uri": "string",
-                  "display_name": "string"
-                },
-                "public": false,
-                "snapshot_id": "string",
-                "tracks": {
-                  "href": "string",
-                  "total": 0
-                },
-                "type": "string",
-                "uri": "string"
-              }
-            ]
-          }
-        const playlists = cachedjson.items;
-        const parsedPlaylists = [];
-        playlists.forEach(playlist => {
-            const parsedPlaylist = {
-                "name": playlist.name,
-                "description": playlist.description,
-                "owner": playlist.owner.display_name,
-                "tracks_total": playlist.tracks.total,
-                "url": playlist.external_urls.spotify,
-                "image": playlist.images[0].url
-            };
-            parsedPlaylists.push(parsedPlaylist);
-        });
-        displayMyPlaylists(parsedPlaylists);
-    }
     function searchPlaylist(){
         fetch("/spotify/playlists")
         .then((response)=>{
@@ -600,12 +435,11 @@
             return data;
         })
         .then((data) => {
-            const playlists = cachedjson.items;
+            const playlists = data.items
             const parsedPlaylists = [];
             playlists.forEach(playlist => {
                 const parsedPlaylist = {
                     "name": playlist.name,
-                    "description": playlist.description,
                     "owner": playlist.owner.display_name,
                     "tracks_total": playlist.tracks.total,
                     "url": playlist.external_urls.spotify,
@@ -633,7 +467,6 @@
             playlists.forEach(playlist => {
                 const parsedPlaylist = {
                     "name": playlist.name,
-                    "description": playlist.description,
                     "owner": playlist.owner.display_name,
                     "tracks_total": playlist.tracks.total,
                     "url": playlist.external_urls.spotify,
@@ -647,42 +480,19 @@
     }
 
     function displayMyPlaylists(playlists) {
-        const playlistContainer = document.getElementById("playlistResults");
-        playlistContainer.innerHTML = ""; // Clear previous content
-    
         playlists.forEach((playlist, index) => {
-            // Create a new card element
-            const playlistElement = document.createElement("div");
-            playlistElement.classList.add("p-3", "rounded", "shadow-lg", "bg-secondary");
+            // Select the relevant elements in the template for each playlist card
+            const titleElement = document.querySelector('#playlistResults > div:nth-child(' + (index + 1) + ') > div.p-5 > h3');
+            const playButton = document.querySelector('#playlistResults > div:nth-child(' + (index + 1) + ') > div.relative > div.absolute > button:nth-child(2)');
+            const tracksElement = document.querySelector('#playlistResults > div:nth-child(' + (index + 1) + ') > div.p-5 > p');
     
-            // Apply margin to create space between playlists
-            if (index > 0) {
-                playlistElement.classList.add("mt-4"); // Add margin top for all but the first playlist
-            }
-    
-            // Create the image element
-            const imageElement = document.createElement("img");
-            imageElement.setAttribute("src", playlist.image || "https://upload.wikimedia.org/wikipedia/en/f/f1/Tycho_-_Epoch.jpg");
-            imageElement.classList.add("block", "w-full", "rounded", "md:w-72");
-            playlistElement.appendChild(imageElement);
-    
-            // Create the playlist title
-            const titleElement = document.createElement("h3");
+            // Update the content with playlist data
             titleElement.textContent = playlist.name;
-            titleElement.classList.add("text-lg", "text-white");
-            playlistElement.appendChild(titleElement);
-    
-            // Create the artist/owner element
-            const artistElement = document.createElement("p");
-            artistElement.textContent = playlist.owner;
-            artistElement.classList.add("text-gray-400");
-            playlistElement.appendChild(artistElement);
-            const commentButton = document.createButton("")
-    
-            // Append the card to the playlist container
-            playlistContainer.appendChild(playlistElement);
+            playButton.href = playlist.url;
+            tracksElement.textContent = "Tracks: " + playlist.tracks_total; // Update the tracks count
         });
     }
+    
 
     function displayFeaturedPlaylists(playlists) {
         const playlistContainer = document.getElementById("featuredPlaylistResults");
@@ -768,7 +578,10 @@ function toggleHeart(buttonId) {
     }
 }
 
-
+window.onload = function() {
+    
+    searchPlaylist();
+};    
 
     </script>
 
