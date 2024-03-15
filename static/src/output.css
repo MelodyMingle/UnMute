@@ -74,6 +74,10 @@ body {
 3. Ensure horizontal rules are visible by default.
 */
 
+.heart-clicked {
+  fill: hotpink; /* Change to bright pink color */
+}
+
 hr {
   height: 0;
   /* 1 */
