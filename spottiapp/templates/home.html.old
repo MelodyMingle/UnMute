@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <button onclick="authenticateSpotify()">Authenticate Spotify</button>
+<button onclick="searchTrack()">Search Spotify</button>
+<button onclick="searchPlaylist()">Search Spotify Playlist</button> -->
+<button onclick="searchPlaylistDummy()">Search Spotify Playlist</button>
+
+<h1 class="bg-green-400">Post</h1>
+
+<h1>Playlist Data</h1>
+<ul id="playlist-data">
+    <!-- This is where the playlist data will be displayed -->
+</ul>
+
+<script>
+    function authenticateSpotify() {
+        fetch("/spotify/is-authenticated")
+          .then(response => response.json())
+          .then(response => {
+            console.log(response);
+            if (!response.status) {
+                window.location.replace('spotify/get-auth-url');
+            }
+        });
+    }
+
+    function searchTrack() {
+        fetch("/spotify/search?query=trouble")
+        .then(response => response.json())
+        .then(data => console.log(data));
+    }
+    
+cachedjson = {
+  "href": "https://api.spotify.com/v1/me/shows?offset=0&limit=20",
+  "limit": 20,
+  "next": "https://api.spotify.com/v1/me/shows?offset=1&limit=1",
+  "offset": 0,
+  "previous": "https://api.spotify.com/v1/me/shows?offset=1&limit=1",
+  "total": 4,
+  "items": [
+    {
+      "collaborative": false,
+      "description": "string",
+      "external_urls": {
+        "spotify": "string"
+      },
+      "href": "string",
+      "id": "string",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228",
+          "height": 300,
+          "width": 300
+        }
+      ],
+      "name": "string",
+      "owner": {
+        "external_urls": {
+          "spotify": "string"
+        },
+        "followers": {
+          "href": "string",
+          "total": 0
+        },
+        "href": "string",
+        "id": "string",
+        "type": "user",
+        "uri": "string",
+        "display_name": "string"
+      },
+      "public": false,
+      "snapshot_id": "string",
+      "tracks": {
+        "href": "string",
+        "total": 0
+      },
+      "type": "string",
+      "uri": "string"
+    }
+  ]
+}
+    function searchPlaylistDummy() {
+        unjsoned = cachedjson.items
+        displayPlaylists(unjsoned);
+    }
+    
+    // function searchPlaylist() {
+    //     fetch("/spotify/search-playlists")
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+            
+    //         displayPlaylists(data);
+    //     });
+    // }
+
+    function displayPlaylists(playlists) {
+        const playlistDataElement = document.getElementById('playlist-data');
+        playlistDataElement.innerHTML = ''; // Clear previous content
+        playlists.forEach(playlist => {
+            const listItem = document.createElement('li');
+            listItem.textContent = playlist.name; // Assuming 'name' is a field in your ParsedPlaylist model
+            playlistDataElement.appendChild(listItem);
+        });
+    }
+
+    function getFeaturedPlaylists() {
+        fetch("/spotify/featured-playlists");
+    }
+    
+    window.onload = function() {
+        searchPlaylistDummy();
+    };
+    
+</script>
+
+
+{% endblock content %}
