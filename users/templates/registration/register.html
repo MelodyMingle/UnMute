@@ -2,20 +2,20 @@
 {% load static %}
 
 <!-- {% block content %} -->
-<div class="bg-white py-8  mx-auto sm:rounded-lg sm:px-10">
-    <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
+<div class="bg-secondary py-8 rounded-lg  mx-auto sm:rounded-lg sm:px-10">
+    <h2 class="text-2xl text-tertiary font-bold mb-6 text-center">Register</h2>
     <form method="POST" class="space-y-6">
         {% csrf_token %}
         <div class="overflow-hidden shadow sm:rounded-md">
-            <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
+            <div class="px-4 py-6 sm:p-6">
+                <div class="grid grid-cols-6 gap-6 text-tertiary bg-secondary">
                     <!-- Dynamically generated form fields will go here -->
                     <!-- You might need to customize this part based on your form fields -->
                     {{ form.as_p }}
                 </div>
             </div>
-            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <div class="px-4 py-3 items-center justify-center text-right sm:px-6">
+                <button type="submit" class="inline-flex py-2 px-4 text-xl font-lg rounded-md text-quinary ">
                     Register
                 </button>
             </div>
