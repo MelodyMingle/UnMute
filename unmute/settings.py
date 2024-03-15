@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Bootstrap
+    'bootstrap5',
      # Tailwind CSS
     'compressor',
     'django_admin_tailwind',
