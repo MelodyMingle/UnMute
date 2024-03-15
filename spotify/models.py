@@ -1,4 +1,5 @@
 from django.db import models
+from spottiapp.models import Post  # Import the Post model
 
 # Create your models here.
 class SpotifyToken(models.Model):
@@ -7,4 +8,17 @@ class SpotifyToken(models.Model):
     refresh_token = models.CharField(max_length=300)
     access_token = models.CharField(max_length=300)
     expires_in = models.DateTimeField()
-    token_type = models.CharField(max_length=300)
+    token_type = models.CharField(max_length=50)
+
+
+class ParsedPlaylist(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    owner = models.CharField(max_length=255)
+    tracks_total = models.IntegerField(default=0)
+    url = models.URLField(max_length=200)
+    image = models.URLField(max_length=200, blank=True, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True) 
+
+    def __str__(self):
+        return self.name

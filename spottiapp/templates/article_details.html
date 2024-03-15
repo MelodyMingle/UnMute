@@ -1,32 +1,56 @@
-Current user: {{ user}}
-
-<h1>{{post.title}}</h1>
-<small>By:
-    {{ post.author }} -
-    {{ post.post_date }}
-    {% if user.is_authenticated %}
-    {% if post.author == user %}
-
-    -
-    <a href="{% url 'delete_post' post.pk %}">(Delete)</a> -
-    <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex flex-col pt-6 mx-auto align-center">
+    <br>
+    <br>
+    <h1>{{post.title}}</h1>
+    <small><strong>By:
+        {{ post.author }} -
+        {{ post.post_date }}
+        {% if user.is_authenticated %}
+        {% if post.author == user %}
+        -
+        <a href="{% url 'delete_post' post.pk %}" style="background-color: #EB9A2F ;" class="px-4 py-2 transition duration-150 ease-in-out rounded hover:bg-red-700 ">Delete</a>
+        -
+        <a href="{% url 'update_post' post.pk %}" style="background-color: #EB9A2F ;"
+        class="px-4 py-2 text-white transition duration-150 ease-in-out bg-blue-500 rounded hover:bg-blue-700">Edit</a>
+    </strong>
+</small>
 {% endif %}
-
 {% endif %}
 <hr>
-<br />
-
+<br>
 {{ post.comment|safe }}
-
-
 <br /><br>
-
-<a class="bg-slate-600" href="{% url 'home' %}">Back home</a>
-
-
-
 <form action="{% url 'like_post' post.pk %}" method="POST">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary" name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
-
-</form>
+    <button type="submit" style="background-color: #EB9A2F ;" class="px-4 py-2 transition duration-150 ease-in-out rounded hover:bg-red-700 " name="post_id" value="{{ post.id }}">Like</button> + {{ total_likes }}
+    </form>
+    <br>
+    <section class="py-8 antialiased bg-white dark:bg-gray-900 lg:py-16">
+        <div class="max-w-2xl px-4 mx-auto">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg font-bold text-gray-900 lg:text-2xl dark:text-white">Comments</h2>
+            {% if not post.comments.all %}
+              <p>No comments yet <a href="{% url 'add_comment' post.pk %}" class="text-blue-500 hover:text-blue-700">Add Comment</a></p>
+            {% else %}
+              <a href="{% url 'add_comment' post.pk %}" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Add Comment</a>
+          </div>
+          {% for comment in post.comments.all %}
+            <article class="p-6 mb-3 text-base bg-white rounded-lg dark:bg-gray-900">
+              <footer class="flex items-center justify-between mb-2">
+                <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">{{ comment.name }}</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time datetime="{{ comment.time_added }}">{{ comment.time_added }}</time></p>
+                </div>
+              </footer>
+              <p class="text-gray-500 dark:text-gray-400">{{ comment.body }}</p>
+            </article>
+          {% endfor %}
+          <a href="{% url 'add_comment' post.pk %}" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Add Comment</a>
+          {% endif %}
+        </div>
+    </section>
+    <a href="{% url 'add_comment' post.pk %}" style="background-color: #EB9A2F ;" class="px-4 py-2 transition duration-150 ease-in-out rounded hover:bg-red-700 ">Add Comment</a>
+</div>
+{% endblock %}

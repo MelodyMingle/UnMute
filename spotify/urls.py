@@ -6,6 +6,5 @@ urlpatterns = [
     path('callback', spotify_callback),
     path('is-authenticated', IsAuthenticated.as_view()),
     path('search', SpotifySearch.as_view({'get':'list'}), name='spotify_list'),
-    path('playlists', SpotifySearchPlaylist.as_view({'get':'list'}), name='spotify_playlist'),
-    path('featured-playlists', SpotifyFeaturedPlaylists.as_view({'get':'list'}), name='featured_playlist')
+    path('playlists/', SpotifySearchPlaylist.as_view({'get':'list'}), name='spotify_playlist')
 ]

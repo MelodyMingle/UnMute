@@ -139,5 +139,3 @@ class SpotifyFeaturedPlaylists(GenericViewSet):
 
         return Response(response.json(), status=status.HTTP_200_OK)
 
-
-
