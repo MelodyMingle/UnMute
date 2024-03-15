@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h8d89k$d7bp-6^@^nrnxfk3m%^o54@ykzpb23+i4zmzrb76j@&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['o.o.o.o','localhost','127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Bootstrap
+  
      # Tailwind CSS
     'compressor',
     'django_admin_tailwind',
