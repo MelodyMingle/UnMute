@@ -15,7 +15,7 @@
 </head>
 
 <body class="bg-primary">
-  <nav class="px-2 py-8 bg-primary sm:px-4 dark:bg-gray-800">
+  <nav class="px-4 py-8 bg-primary sm:px-4 lg:px-6 dark:bg-gray-800">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
 
       <a href="{% url 'home' %}" class="flex items-center">
@@ -27,7 +27,10 @@
           {% if user.is_authenticated %}
           <li>
             <button onclick="authenticateSpotify()"
-              class="block py-2 pl-3 pr-4 rounded md:text-green-200 md:p-0"
+
+              style="color: chartreuse;"
+              class="block py-2 pl-3 pr-4 text-white bg-green-500 rounded md:p-0"
+
               aria-current="page">Spotify Login</button>
           </li>
           <li>
