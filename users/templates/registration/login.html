@@ -1,28 +1,20 @@
-<!-- login.html -->
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<!-- component -->
-<!-- Created by joker banny -->
-<div class="p-10 mx-auto xs:p-0 md:w-full md:max-w-md">
-    <div class="w-2/3 shadow lg:w-2/5 md:w-1/2">
+<!-- {% extends 'base.html' %} -->
+<!-- {% load static %} -->
+
+
+<!-- {% block content %} -->
+
+<table>
+    <div class="p-10 bg-white mx-auto xs:p-0 md:w-full md:max-w-md">
+
+        <h1 class="mb-6 font-sans text-2xl font-bold text-center text-wrap py-7 text-tertiary">Welcome Back!</h1>
         <form method="POST" class="min-w-full rounded-lg shadow-lg bg-secondary">
+            {{ form.as_table }}
             {% csrf_token %}
-            <h1 class="mb-6 font-sans text-2xl font-bold text-center text-wrap py-7 text-tertiary">Welcome Back!</h1>
-            <div class="px-5 py-5">
-                <label class="block my-3 font-semibold text-tertiary text-md" for="username">Username</label>
-                <input class="w-full px-4 py-2 bg-gray-100 rounded-lg focus:outline-none" type="text" name="username"
-                    id="username" placeholder="username" />
-            </div>
-            <div class="px-5 py-5">
-                <label class="block my-3 font-semibold text-tertiary text-md" for="password">Password</label>
-                <input class="w-full px-4 py-2 bg-gray-100 rounded-lg focus:outline-none" type="text" name="password"
-                    id="password" placeholder="password" />
-            </div>
-            <button type="submit"
-                class="w-full px-4 py-2 mt-6 font-sans text-lg font-semibold tracking-wide rounded-lg mb-3ocus:shadow-sm focus:ring-4 focus:ring-quinary focus:ring-opacity-50 text-quinary">Login</button>
+        </div>
         </form>
-        <button type="submit">
-    </div>
-</div>
-{% endblock %}
+    </table>
+    <button class="px-4 py-2 bg-blue-500 text-white rounded" type="submit">Log in</button>
+
+
+<!-- {% endblock %} -->

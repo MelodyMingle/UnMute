@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    # Bootstrap
+    'bootstrap5',
+
      # Tailwind CSS
     'compressor',
     'django_admin_tailwind',
@@ -109,17 +113,38 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'OPTIONS': {
+            'error_messages': {
+                'password_too_similar': "The password is too similar to the user's other personal information.",
+            }
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'error_messages': {
+                'too_short': "The password must be more secure.",
+            }
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'OPTIONS': {
+            'error_messages': {
+                'password_too_common': "The password is too common.",
+            }
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'OPTIONS': {
+            'error_messages': {
+                'password_entirely_numeric': "The password cannot be entirely numeric.",
+            }
+        }
     },
 ]
+
 
 
 # Internationalization
