@@ -7,12 +7,12 @@
 <table>
     {% if user.is_authenticated %}
     <div class="form-group ">
-        <h2 class="text-2xl font-bold mb-4">Add comment</h2>
+        <h2 class="mb-4 text-2xl font-bold">Add comment</h2>
         <form method="POST" class="space-y-4 ">
             {{ form.as_table }}
             {% csrf_token %}
         </table>
-        <button class="px-4 py-2 bg-blue-500 text-white rounded" type="submit">Add comment</button>
+        <button class="px-4 py-2 text-white bg-blue-500 rounded" type="submit">Add comment</button>
     </form>
 </div>
 
