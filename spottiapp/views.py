@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import PostForm, EditForm
-from .models import Post
+from .forms import PostForm, EditForm, CommentForm
+from .models import Post, Comment
 from django.urls import reverse_lazy
 
 
@@ -31,6 +31,16 @@ class AddPostView(CreateView):
     template_name = 'add_post.html'
     # fields = '__all__'
 
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+    success_url = reverse_lazy('home')
+    # fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 class UpdatePostView(UpdateView):
     model = Post
